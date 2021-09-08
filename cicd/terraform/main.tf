@@ -58,20 +58,20 @@ resource "google_cloudbuild_trigger" "build-trigger" {
   filename = "cicd/cloudbuild.yaml"
 }
 
-//resource "google_cloud_run_service" "default" {
-//  name     = "cloudrun-srv"
-//  location = "us-central1"
-//
-//  template {
-//    spec {
-//      containers {
-//        image = "us-docker.pkg.dev/cloudrun/container/hello"
-//      }
-//    }
-//  }
-//
-//  traffic {
-//    percent         = 100
-//    latest_revision = true
-//  }
-//}
+resource "google_cloud_run_service" "default" {
+  name     = "cloudrun-srv"
+  location = var.region
+
+  template {
+    spec {
+      containers {
+        image = "${var.region}-docker.pkg.dev/${var.project_id}/tango_test"
+      }
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
