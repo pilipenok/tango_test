@@ -5,13 +5,13 @@ steps:
       [
         "build",
         "-t",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/tango_test:$SHORT_SHA",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}:$SHORT_SHA",
         "-t",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/tango_test:latest",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}:latest",
         "-f",
         "cicd/Dockerfile",
         ".",
       ]
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: [ "push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/tango_test"]
+    args: [ "push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}"]
