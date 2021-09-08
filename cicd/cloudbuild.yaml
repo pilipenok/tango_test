@@ -8,6 +8,8 @@ steps:
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/tango_test:$SHORT_SHA",
         "-t",
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/tango_test:latest",
+        "-f",
+        "cicd/Dockerfile"
         ".",
       ]
   # Push the container image to Container Registry
