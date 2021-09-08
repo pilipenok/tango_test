@@ -15,7 +15,7 @@ terraform {
 provider "google" {
   credentials = file("../../credentials.json")
 
-  project = var.project_id
+  project = var.project
   region  = var.region
   zone    = var.zone
 }
@@ -23,7 +23,7 @@ provider "google" {
 provider "google-beta" {
   credentials = file("../../credentials.json")
 
-  project = var.project_id
+  project = var.project
   region  = var.region
   zone    = var.zone
 }
@@ -52,43 +52,25 @@ resource "google_cloudbuild_trigger" "build-trigger" {
     _REGISTRY       = google_artifact_registry_repository.tango-test.repository_id
     _REGISTRY_URL   = "${var.region}-docker.pkg.dev"
     _REGION         = var.region
-    _PROJECT_ID     = var.project_id
+    _PROJECT_ID     = var.project
   }
 
   filename = "cicd/cloudbuild.yaml"
 }
 
-resource "google_cloud_run_service" "default" {
-  name     = "cloudrun-srv"
-  location = var.region
 
-  template {
-    spec {
-      containers {
-        image = "${var.region}-docker.pkg.dev/${var.project_id}/tango-test/backend"
-      }
-    }
+resource "google_bigtable_instance" "dev-instance" {
+  name = "tf-instance"
+
+  cluster {
+    cluster_id   = "tf-instance-cluster"
+    num_nodes    = 1
+    storage_type = "HDD"
   }
 
-  traffic {
-    percent = 100
-    latest_revision = true
+  labels = {
+    my-label = "dev-tango"
   }
 }
 
-data "google_iam_policy" "noauth" {
-  binding {
-    role = "roles/run.invoker"
-    members = [
-      "allUsers",
-    ]
-  }
-}
 
-resource "google_cloud_run_service_iam_policy" "noauth" {
-  location    = google_cloud_run_service.default.location
-  project     = google_cloud_run_service.default.project
-  service     = google_cloud_run_service.default.name
-
-  policy_data = data.google_iam_policy.noauth.policy_data
-}
