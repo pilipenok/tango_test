@@ -9,7 +9,7 @@ steps:
         "-t",
         "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/tango_test:latest",
         "-f",
-        "cicd/Dockerfile"
+        "cicd/Dockerfile",
         ".",
       ]
   # Push the container image to Container Registry
