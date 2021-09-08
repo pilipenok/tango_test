@@ -51,6 +51,7 @@ resource "google_cloudbuild_trigger" "build-trigger" {
   substitutions = {
     _REGISTRY       = google_artifact_registry_repository.tango-test.repository_id
     _REGISTRY_URL   = "${var.region}-docker.pkg.dev"
+    _REGION         = var.region
   }
 
   filename = "cicd/cloudbuild.yaml"
