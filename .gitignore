@@ -1,0 +1,7 @@
+/venv/
+.idea
+*.db
+*/**/.terraform
+*/**/.terraform.*
+*/**/terraform.*
+/credentials.json
