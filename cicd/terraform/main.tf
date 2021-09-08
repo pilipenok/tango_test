@@ -65,7 +65,7 @@ resource "google_cloud_run_service" "default" {
   template {
     spec {
       containers {
-        image = "${var.region}-docker.pkg.dev/${var.project_id}/tango_test"
+        image = "${var.region}-docker.pkg.dev/${var.project_id}/tango-test/backend"
       }
     }
   }

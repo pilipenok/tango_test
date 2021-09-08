@@ -5,13 +5,13 @@ steps:
       [
         "build",
         "-t",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}:$SHORT_SHA",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/backend:$SHORT_SHA",
         "-t",
-        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}:latest",
+        "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/backend:latest",
         "-f",
         "cicd/Dockerfile",
         ".",
       ]
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: [ "push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}"]
+    args: [ "push", "${_REGISTRY_URL}/$PROJECT_ID/${_REGISTRY}/backend"]
