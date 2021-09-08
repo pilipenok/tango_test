@@ -1,6 +1,7 @@
 redis3==3.5.2.2
 flask==2.0.1
 flask_cors==3.0.10
+requests
 # google-python-cloud-debugger
 # google-cloud-profiler==3.0.5
 

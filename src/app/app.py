@@ -8,6 +8,10 @@ app = flask.Flask(__name__, static_url_path="")
 app.register_blueprint(api, url_prefix='')
 
 
+@app.route('/')
+def home():
+    return "Home Page"
+
 # TODO: if needed
 # from flask_cors import CORS
 # CORS(app, resources={r"/api/*": {"origins": ["https://tango.ai", "https://dev.tango.ai"]}})
