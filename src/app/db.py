@@ -4,7 +4,6 @@ import logging
 import config
 from typing import List
 from random import randint
-from time import time
 
 
 bigtable_client = bigtable.Client(project=config.gcp_project_id, admin=True)
@@ -50,8 +49,8 @@ def create_db():
 
             row_key = f"{id}#{user_id}"
             row = table.direct_row(row_key)
-            row.set_cell(CF, "subscriber_id", id, int(time()))
-            row.set_cell(CF, "user_id", user_id, int(time()))
+            row.set_cell(CF, "subscriber_id", id)
+            row.set_cell(CF, "user_id", user_id)
 
             row.commit()
 
