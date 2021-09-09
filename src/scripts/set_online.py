@@ -9,7 +9,7 @@ def main(event, context):
          event (dict): Event payload.
          context (google.cloud.functions.Context): Metadata for the event.
     """
-    redis_host = os.environ.get('REDIS_HOST', '10.249.237.123')
+    redis_host = os.environ.get('REDIS_HOST', 'localhost')
     redis_port = int(os.environ.get('REDIS_PORT', 6379))
     redis_client = redis.StrictRedis(host=redis_host, port=redis_port)
     ids = [randint(1,1000) for _ in range(1000)]
@@ -17,3 +17,6 @@ def main(event, context):
     print(ids)
     redis_client.lpush("online", *ids)
 
+
+if __name__ == '__main__':
+    main(1,2)
