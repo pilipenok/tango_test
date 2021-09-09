@@ -6,7 +6,7 @@ from random import randint
 from time import time
 
 
-bigtable_client = bigtable.Client(project=config.gcp_project_id)
+bigtable_client = bigtable.Client(project=config.gcp_project_id, admin=True)
 bigtable_instance = bigtable_client.instance(config.gcp_bigtable_instance_id)
 table = bigtable_instance.table('subscriptions')
 CF = 'cf1'
@@ -40,6 +40,8 @@ def filtered_online_set(user_id: int, online_ids: List) -> List:
 
 def create_db():
     logging.info(f"creating subscriptions...")
+
+
 
     table.column_family(CF).create()
 
