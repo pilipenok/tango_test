@@ -1,5 +1,5 @@
 from time import sleep
-from redis3 import Redis
+from redis import Redis
 from random import randint
 
 client = Redis()
