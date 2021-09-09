@@ -17,5 +17,4 @@ resource "google_bigtable_instance" "instance" {
 resource "google_bigtable_table" "subscriptions" {
   name          = "subscriptions"
   instance_name = google_bigtable_instance.instance.name
-  split_keys    = ["subscriber_id", "user_id", "timestamp"]
 }
