@@ -19,6 +19,8 @@ def online(user_id):
 
 
 def call_prediction(user_id):
+    return str(_get_prediction(user_id))
+
     session = requests.Session()
     api_uri = f"{config.predictions_endpoint}/{user_id}"
     resp = session.get(api_uri)
