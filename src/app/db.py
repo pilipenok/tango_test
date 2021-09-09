@@ -41,8 +41,6 @@ def filtered_online_set(user_id: int, online_ids: List) -> List:
 def create_db():
     logging.info(f"creating subscriptions...")
 
-
-
     table.column_family(CF).create()
 
     for id in range(1000):
@@ -51,8 +49,8 @@ def create_db():
 
             row_key = f"{id}#{user_id}"
             row = table.direct_row(row_key)
-            row.set_cell(CF, "subscriber_id", id, time())
-            row.set_cell(CF, "user_id", user_id, time())
+            row.set_cell(CF, "subscriber_id", id, int(time()))
+            row.set_cell(CF, "user_id", user_id, int(time()))
 
             row.commit()
 
