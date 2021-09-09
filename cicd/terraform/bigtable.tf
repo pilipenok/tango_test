@@ -8,7 +8,7 @@ resource "google_bigtable_instance" "instance" {
   }
 
   labels = {
-    my-label = "tango"
+    my-label = "tango-label"
   }
 
   deletion_protection = false
