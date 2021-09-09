@@ -19,7 +19,8 @@ variable "services" {
       "run.googleapis.com",
       "compute.googleapis.com",
       "logging.googleapis.com",
-      "bigtableadmin.googleapis.com"
+      "bigtableadmin.googleapis.com",
+      "redis.googleapis.com"
   ]
   description = "The GCP APIs that should be enabled in this project."
 }
