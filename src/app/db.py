@@ -1,4 +1,5 @@
 from google.cloud import bigtable
+from google.cloud.bigtable import row_filters, row_set
 import logging
 import config
 from typing import List
@@ -19,16 +20,16 @@ def filtered_online_set(user_id: int, online_ids: List) -> List:
         create_db()
 
     prefix = f"{user_id}#"
-    row_set = bigtable.row_set.RowSet()
-    row_set.add_row_range_with_prefix(prefix)
-    row_set.add_row_range_from_keys(
+    row_set_ = row_set.RowSet()
+    row_set_.add_row_range_with_prefix(prefix)
+    row_set_.add_row_range_from_keys(
         start_key=f"{prefix}0000".encode(),
         end_key=f"{prefix}1000".encode()
     )
 
-    row_filter = bigtable.row_filters.FamilyNameRegexFilter("cf1.user_id".encode())
+    row_filter = row_filters.FamilyNameRegexFilter("cf1.user_id".encode())
 
-    rows = table.read_rows(row_set=row_set, filter_=row_filter)
+    rows = table.read_rows(row_set=row_set_, filter_=row_filter)
 
     ids = []
     for row in rows:
