@@ -34,6 +34,7 @@ def filtered_online_set(user_id: int, online_ids: List) -> List:
     for row in rows:
         id = row.cells['cf1'][b'user_id'][0].value.decode('utf-8')
         ids.append(id)
+    #return ids
 
     return [id for id in ids if id in online_ids]
     # return list(set(online_ids) & set(ids))

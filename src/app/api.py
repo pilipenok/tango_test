@@ -15,7 +15,9 @@ def online(user_id):
     ids = filtered_online_set(user_id, online_ids)
     ids = list(ids)
     print(ids)
-    return {id: call_prediction(id) for id in ids}
+    result = {id: call_prediction(id) for id in ids}
+    result['online_ids'] = online_ids
+    return result
 
 
 def call_prediction(user_id):
