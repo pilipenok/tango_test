@@ -14,14 +14,14 @@ def online(user_id):
     online_ids = online_set()
     ids = filtered_online_set(user_id, online_ids)
     ids = list(ids)
-    print(ids)
-    result = {id: call_prediction(id) for id in ids}
+    print("ids=", ids)
+    result = {str(id): call_prediction(id) for id in ids}
     result['online_ids'] = online_ids
     return result
 
 
 def call_prediction(user_id):
-    return str(_get_prediction(user_id))
+    return _get_prediction(user_id)
 
     session = requests.Session()
     api_uri = f"{config.predictions_endpoint}/{user_id}"

@@ -1,5 +1,5 @@
 resource "google_storage_bucket_object" "set_online_zip" {
-  name = "set_online1.zip"
+  name = "set_online.zip"
   bucket = google_storage_bucket.bucket.name
   source = "./../../src/cf/set_online.zip"
   #content_type = "application/zip"

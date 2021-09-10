@@ -31,10 +31,11 @@ def filtered_online_set(user_id: int, online_ids: List) -> List:
     rows = table.read_rows(row_set=row_set_, filter_=row_filter)
 
     ids = []
+
     for row in rows:
-        id = row.cells['cf1'][b'user_id'][0].value.decode('utf-8')
+        id = row.cells['cf1'][b'user_id'][0].value#.decode()
+        id = int(id)
         ids.append(id)
-    #return ids
 
     return [id for id in ids if id in online_ids]
     # return list(set(online_ids) & set(ids))
