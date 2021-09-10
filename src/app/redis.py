@@ -15,11 +15,11 @@ def online_set():
     return ids
 
 
-def cached_call_prediction(f, user_id, expired):
+def cached_call_prediction(f, user_id, ex):
     key = f"prediction_{user_id}"
     if redis_client.exists(key):
-        value = float(redis_client.get(key))
+        value = redis_client.get(key)
     else:
         value = f(user_id)
-        redis_client.set(key, value, expired)
-    return value
+        redis_client.set(key, value, ex=ex)
+    return float(value)

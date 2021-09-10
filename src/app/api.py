@@ -16,8 +16,10 @@ def online(user_id):
     online_ids = online_set()
     ids = filtered_online_set(user_id, online_ids)
     ids = list(ids)
-    print("ids=", ids)
-    result = {str(id): call_prediction(id) for id in ids}
+    result = {
+        str(id): cached_call_prediction(call_prediction, id, 15)
+        for id in ids
+    }
     result.update({
         #'online_ids': online_ids,
         'timing': time.time() - t
@@ -26,8 +28,6 @@ def online(user_id):
 
 
 def call_prediction(user_id):
-    return cached_call_prediction(_get_prediction, user_id, 5)
-
     session = requests.Session()
     api_uri = f"{config.predictions_endpoint}/{user_id}"
     resp = session.get(api_uri)

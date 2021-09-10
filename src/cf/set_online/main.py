@@ -18,6 +18,7 @@ def main(_event, _context):
     print(ids)
     redis_client.delete("online")
     redis_client.sadd("online", *ids)
+    redis_client.exists()
 
 if __name__ == '__main__':
     main(1,2)
