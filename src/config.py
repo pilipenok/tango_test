@@ -11,4 +11,4 @@ PROFILE = os.environ.get('PROFILE', False)
 redis_host = os.environ.get('REDIS_HOST', 'localhost')
 redis_port = os.environ.get('REDIS_PORT', 6379)
 
-predictions_endpoint = 'http://127.0.0.1:5000/prediction'
+prediction_url = os.environ.get('PREDICTION_URL', 'http://127.0.0.1:5000/prediction')
