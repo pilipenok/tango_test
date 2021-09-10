@@ -27,3 +27,11 @@ provider "google-beta" {
   region  = var.region
   zone    = var.zone
 }
+
+resource "google_storage_bucket" "bucket" {
+  name = var.project
+}
+
+resource "google_pubsub_topic" "trigger-set-online" {
+  name = "trigger-set-online"
+}
